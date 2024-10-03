@@ -1,0 +1,21 @@
+.navbar-container {
+    height: 10vh;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    height: 10vh;
+}
+
+.content-container {
+    background-color: red;
+    min-height: 85vh;
+}
+
+.footer-container {
+    height: 5vh;
+}
