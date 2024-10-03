@@ -1,6 +1,4 @@
-$global-white: #ffffff;
-$gray-color: #414141;
-$success-color: #54ca70;
-$danger-color: #dc3545;
-$warning-color: #ffc107;
-$info-color: #17a2b8;
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
