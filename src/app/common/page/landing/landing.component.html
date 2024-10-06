@@ -1,0 +1,45 @@
+<div class="d-flex flex-column min-vh-100">
+    <app-navbar></app-navbar>
+
+    <div class="flex-grow-2 container mt-4">
+        <div class="feed">
+            <div class="row">
+                <div class="col-md-3 mb-3" *ngFor="let item of feedItems">
+                    <div class="card h-300">
+                        <div class="card-body">
+                            <img src="{{ item.imageUrl }}" class="card-img-top" alt="Card image">
+
+                            <!-- <h5 class="card-title">{{ item.businessName }}</h5>
+                            <p class="card-text">{{ item.description }}</p> -->
+
+                            <div class="top-section">
+                                <div class="section-1">
+                                   <p>{{item.businessName}}</p>
+                                </div>
+                                <div class="section-2">
+                                    <p>{{item.location}}</p>
+                                </div>
+                            </div>
+
+                            <div class="middle-section">
+                                <div class="section-1">
+                                    <p>{{item.description}}</p>
+                                </div>
+                                <div class="section-2">
+                                    <p>{{item.rating}}</p><i class="bi bi-hand-thumbs-up"></i>
+
+                                </div>
+                            </div>
+
+                            <div class="bottom-section">
+                                <a href="#">Click Here</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <app-footer></app-footer>
+</div>

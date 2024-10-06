@@ -1,0 +1,79 @@
+app-navbar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+}
+
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.feed {
+    flex-grow: 1;
+}
+
+.top-section {
+    width: 100%;
+    display: flex;
+    .section-1 {
+        width: 60%;
+        p {
+            margin-bottom: 0px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+    }
+
+    .section-2 {
+        width: 40%;
+        p {
+            margin-bottom: 0px;
+            font-size: 0.6rem;
+            margin-top: 3px;
+            float: right;
+            font-weight: 500;
+        }
+    }
+}
+
+.middle-section {
+    width: 100%;
+    display: flex;
+    .section-1 {
+        width: 70%;
+        p {
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-bottom: 0px;
+            margin-top: 2px;
+            color: gray;
+        }
+    }
+
+    .section-2 {
+        width: 30%;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 5px;
+        p {
+            margin-bottom: 0px;
+            font-size: 0.8rem;
+            margin-top: 3px;
+        }
+        i {
+            font-weight: bold;
+            color: blue;
+        }
+    }
+}
+
+.bottom-section {
+    font-size: 0.9rem;
+}
+
+app-footer {
+    background-color: #f8f9fa;
+    text-align: center;
+}
