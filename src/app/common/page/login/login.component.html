@@ -1,0 +1,33 @@
+<div class="d-flex align-items-center justify-content-center bg-danger vh-10">
+    dfdsef
+</div>
+<div class="d-flex align-items-center justify-content-center vh-90">
+    <div class="login-container p-4 rounded shadow" style="max-width: 400px; width: 100%;">
+        <h3 class="text-center mb-4">Login</h3>
+
+        <form>
+            <div class="mb-3">
+                <label for="email" class="form-label custom-label">Email address</label>
+                <input type="email" id="email" class="form-control form-control-sm" placeholder="Enter your email"
+                    name="email" [(ngModel)]="email">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label custom-label">Password</label>
+                <input type="password" id="password" class="form-control form-control-sm"
+                    placeholder="Enter your password" name="password" [(ngModel)]="password">
+            </div>
+            <button class="btn btn-sm login-btn w-100" (click)="login()">Login</button>
+        </form>
+        <p class="text-center custom-paragraph mt-3">
+            <a href="#">Forgot password?</a>
+        </p>
+    </div>
+</div>
+
+<ngb-alert *ngIf="loginFailed" type="danger" class="custom-alert" (close)="closeEAlert()">
+    Invalid email or password.
+</ngb-alert>
+
+<ngb-alert *ngIf="loginSuccess" type="success" class="custom-alert" (close)="closeSAlert()">
+    Login success.
+</ngb-alert>
