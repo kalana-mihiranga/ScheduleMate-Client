@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { LandingComponent } from './common/page/landing/landing.component';
-import { LoginComponent } from './common/page/login/login.component';
-import { RegisterComponent } from './common/page/register/register.component';
+import { LandingComponent } from './page/common/landing/landing.component';
+import { LoginComponent } from './page/common/login/login.component';
+import { RegisterComponent } from './page/common/register/register.component';
 
 export const routes: Routes = [
     { path: 'home', component: LandingComponent },
