@@ -1,6 +1,26 @@
 <div class="d-flex flex-column min-vh-100">
     <app-navbar></app-navbar>
 
+    <div class="row mt-4 d-flex justify-content-center">
+        <div class="filter-sub-container">
+
+            <div class="col-8">
+                <div class="input-group search-bar-container">
+                    <input type="text" class="form-control form-control-sm">
+                    <button class="btn search-button" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-4 d-flex justify-content-end">
+                <button class="btn filter-button" type="button">
+                    filter <i class="bi bi-filter"></i>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
     <div class="flex-grow-2 container mt-4">
         <div class="feed">
             <div class="row">
@@ -9,12 +29,9 @@
                         <div class="card-body">
                             <img src="{{ item.imageUrl }}" class="card-img-top" alt="Card image">
 
-                            <!-- <h5 class="card-title">{{ item.businessName }}</h5>
-                            <p class="card-text">{{ item.description }}</p> -->
-
                             <div class="top-section">
                                 <div class="section-1">
-                                   <p>{{item.businessName}}</p>
+                                    <p>{{item.businessName}}</p>
                                 </div>
                                 <div class="section-2">
                                     <p>{{item.location}}</p>

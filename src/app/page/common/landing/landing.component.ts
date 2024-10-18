@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FooterComponent } from '../../component/footer/footer.component';
-import { NavbarComponent } from '../../component/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { FooterComponent } from '../../../common/component/footer/footer.component';
+import { NavbarComponent } from '../../../common/component/navbar/navbar.component';
 
 @Component({
   selector: 'app-landing',
