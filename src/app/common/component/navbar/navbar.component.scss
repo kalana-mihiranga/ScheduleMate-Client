@@ -1,12 +1,14 @@
 .navbar {
-    background-color: rgb(160, 250, 160);
+    background-color: #fff;
+    border-bottom: 2px solid rgb(231, 231, 231);
 }
 
 .login-btn {
-    background-color: rgb(25, 184, 25);
+    background-color: rgb(100, 230, 82);
     color: #fff;
     font-weight: 500;
     i {
         font-size: 1.1em;
     }
+    border-radius: 20px;
 }

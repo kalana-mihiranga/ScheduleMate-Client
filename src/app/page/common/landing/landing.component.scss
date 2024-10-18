@@ -14,11 +14,32 @@ app-navbar {
     flex-grow: 1;
 }
 
+.filter-sub-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-bar-container {
+    width: 70%;
+
+    input {
+        border: 1px solid rgb(150, 150, 150);
+    }
+}
+
+.filter-button,
+.search-button {
+    border: 1px solid rgb(150, 150, 150);
+}
+
 .top-section {
     width: 100%;
     display: flex;
+
     .section-1 {
         width: 60%;
+
         p {
             margin-bottom: 0px;
             font-weight: bold;
@@ -28,6 +49,7 @@ app-navbar {
 
     .section-2 {
         width: 40%;
+
         p {
             margin-bottom: 0px;
             font-size: 0.6rem;
@@ -41,8 +63,10 @@ app-navbar {
 .middle-section {
     width: 100%;
     display: flex;
+
     .section-1 {
         width: 70%;
+
         p {
             font-size: 0.7rem;
             font-weight: 500;
@@ -57,11 +81,13 @@ app-navbar {
         display: flex;
         justify-content: flex-end;
         padding-right: 5px;
+
         p {
             margin-bottom: 0px;
             font-size: 0.8rem;
             margin-top: 3px;
         }
+
         i {
             font-weight: bold;
             color: blue;
