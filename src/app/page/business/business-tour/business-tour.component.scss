@@ -57,11 +57,11 @@
     padding-right: 20px;
 }
 
-.active-badge {
+.complete-badge {
     background-color: rgb(10, 196, 10);
 }
 
-.inactive-badge {
+.cancelled-badge {
     background-color: rgb(224, 107, 39);
 }
 
@@ -72,4 +72,15 @@
 
 .footer-container {
     height: 8vh;
+}
+
+.nav-item {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+    border-top: 2px solid rgb(44, 240, 44);
+    color: #000;
 }
