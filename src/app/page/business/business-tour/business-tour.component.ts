@@ -3,7 +3,7 @@ import { InsideFooterComponent } from '../../../common/component/inside-footer/i
 import { BusinessNavbarComponent } from '../../../common/component/business-navbar/business-navbar.component';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule, NgbPaginationModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 
 interface Country {
 	id?: number;
@@ -97,11 +97,13 @@ const COUNTRIES: Country[] = [
 @Component({
   selector: 'app-business-tour',
   standalone: true,
-  imports: [InsideFooterComponent, BusinessNavbarComponent, CommonModule, DecimalPipe, FormsModule, NgbTypeaheadModule, NgbPaginationModule],
+  imports: [InsideFooterComponent, BusinessNavbarComponent, CommonModule, DecimalPipe, FormsModule, NgbTypeaheadModule, NgbPaginationModule, NgbNavModule],
   templateUrl: './business-tour.component.html',
   styleUrl: './business-tour.component.scss'
 })
 export class BusinessTourComponent {
+
+  active = 1;
 
   page = 1;
 	pageSize = 4;
