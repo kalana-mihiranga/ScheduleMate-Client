@@ -1,0 +1,92 @@
+.min-vh-100 {
+    min-height: 100vh;
+}
+
+.navbar-container {
+    height: 10vh;
+}
+
+.main-container {
+    min-height: 82vh;
+    max-height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.sub-container {
+    width: 85%;
+    // background-color: rgb(120, 233, 129);
+}
+
+.rating {
+    display: flex;
+
+    p {
+        margin-bottom: 0;
+        margin-left: 0.5em;
+        font-size: 0.9em;
+    }
+}
+
+.reviews {
+    display: flex;
+    margin-left: 1em;
+
+    p {
+        margin-bottom: 0;
+        margin-left: 0.5em;
+        font-size: 0.9em;
+    }
+}
+
+.location {
+    display: flex;
+    margin-left: 1em;
+
+    p {
+        margin-bottom: 0;
+        margin-left: 0.5em;
+        font-size: 0.9em;
+    }
+}
+
+.photo-container {
+    background-color: rgb(122, 228, 219);
+    width: 100%;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-1 {
+    width: 50%;
+}
+
+.section-2 {
+    width: 50%;
+}
+
+.week-days {
+    display: flex;
+    gap: 10px;
+}
+
+.day {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #333;
+    text-transform: uppercase;
+    border: 2px solid #ccc;
+}
+
+.footer-container {
+    height: 8vh;
+}

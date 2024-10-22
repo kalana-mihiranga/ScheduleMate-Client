@@ -6,7 +6,7 @@
     <div class="main-container">
         <div class="header-container">
             <h5>Packages</h5>
-            <button type="button" class="btn btn-sm add-btn"><i class="bi bi-plus-circle-fill"></i>Create
+            <button type="button" class="btn btn-sm add-btn" (click)="openAddPackage(addPackage)"><i class="bi bi-plus-circle-fill"></i>Create
                 Package</button>
         </div>
 
@@ -75,3 +75,40 @@
         <app-inside-footer></app-inside-footer>
     </div>
 </div>
+
+<!-- add package modal -->
+<ng-template #addPackage let-modal>
+	<div class="modal-header">
+		<h6 class="modal-title">Add Package</h6>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<div class="row mb-2">
+            <div class="col">
+                <label for="packageName" class="form-label custom-label small">Package Name</label>
+                <input type="text" id="packageName" class="form-control form-control-sm" placeholder="Package Name">
+            </div>
+
+            <div class="col">
+                <label for="duration" class="form-label custom-label small">Duration (Min)</label>
+                <input type="text" id="duration" class="form-control form-control-sm" placeholder="Duration (Min)">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label for="price" class="form-label custom-label small">Price</label>
+                <input type="text" id="price" class="form-control form-control-sm" placeholder="Price">
+            </div>
+
+            <div class="col">
+                <label for="pasangerCount" class="form-label custom-label small">Maximum Pasanger Count</label>
+                <input type="text" id="pasangerCount" class="form-control form-control-sm" placeholder="Pasanger Count">
+            </div>
+        </div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-danger" (click)="modal.close('Close click')">Cancel</button>
+        <button type="button" class="btn btn-sm btn-success" (click)="modal.close('Close click')">Add</button>
+	</div>
+</ng-template>
