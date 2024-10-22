@@ -1,0 +1,26 @@
+.navbar {
+    background-color: #fff;
+    border-bottom: 2px solid rgb(231, 231, 231);
+}
+
+.navbar-nav {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    a {
+        font-size: 0.9em;
+        font-weight: 500;
+    }
+}
+
+.user-btn {
+    background-color: rgb(45, 201, 14);
+    border-radius: 30px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+    i {
+        font-size: 2em;
+        color: #fff;
+    }
+}
