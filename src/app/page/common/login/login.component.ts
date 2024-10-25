@@ -19,7 +19,13 @@ export class LoginComponent {
 
   ) {}
 
-  ngOnInit(){
+
+  email: string = '';
+  password: string = '';
+
+
+
+  login() {
     this.showToastMessage(
       'Warning!',
       ['Error subProduct Loading'],
@@ -27,15 +33,8 @@ export class LoginComponent {
       '#FCC200',
       'bi bi-exclamation-triangle-fill'
     );
-  }
-  email: string = '';
-  password: string = '';
-
-
-
-  login() {
-    this.loginSuccess = false;
-    this.loginFailed = true;
+    // this.loginSuccess = false;
+    // this.loginFailed = true;
   }
 
   clearLoginForm() {
@@ -48,10 +47,6 @@ export class LoginComponent {
 
   closeEAlert(): void {
     this.loginFailed = false;
-  }
-
-  closeSAlert(): void {
-    this.loginSuccess = false;
   }
 
   showToastMessage(
