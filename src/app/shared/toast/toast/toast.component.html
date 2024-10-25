@@ -1,0 +1,33 @@
+@for (toast of toastService.toasts; track toast) {
+    <ngb-toast
+          [autohide]="true" [delay]="toast.delay || 5000"
+          [style.background-color]="toast.backgroundColor"
+          [style.color]="toast.color"
+          class="p-0 m-0"
+        >
+        <div class=" pe-2 ps-2 m-0">
+            <div class="d-flex justify-content-start m-0 p-0">
+                <i id="message-icon" [class]="toast.icon"></i>
+                <b class=" ps-3 pt-0 pb-1">{{toast.header}}</b>
+            </div>
+            <div class=" ">
+                @for (message of toast.body; track message) {
+                    <div class="d-flex justify-content-start">
+                        @if(toast.header=="Warning!"){
+                            @if(toast.body.length==1){
+                                <p class="ps-3 pt-1">{{message}}</p>
+                            }@else{
+                                <i id="paragraph-icon" class="bi bi-circle-fill ps-4"></i>
+                                <p class="p-0 ">{{message}}</p>
+                            }
+                        }
+                        @if(toast.header=="Success!"){
+                            <p class="p-0 ps-4 success-message">{{message}}</p>
+                        }
+               
+                    </div>
+                }
+            </div>
+        </div>
+    </ngb-toast>
+}
