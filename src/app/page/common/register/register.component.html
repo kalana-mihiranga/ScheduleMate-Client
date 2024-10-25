@@ -14,43 +14,53 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="firstName" class="form-label custom-label">First Name</label>
-                                <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName" class="form-control form-control-sm"
-                                    placeholder="Enter your first name" [ngClass]="{'has-error': clientRegistrationFormError['cfNameRequired']}">
+                                <input type="text" id="firstName" name="firstName" [(ngModel)]="firstName"
+                                    class="form-control form-control-sm" placeholder="Enter your first name"
+                                    [ngClass]="{'has-error': clientRegistrationFormError['cfNameRequired']}">
                             </div>
                             <div class="col">
                                 <label for="lastName" class="form-label custom-label">Last Name</label>
-                                <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName" class="form-control form-control-sm"
-                                    placeholder="Enter your lastName" [ngClass]="{'has-error': clientRegistrationFormError['clNameRequired']}">
+                                <input type="text" id="lastName" name="lastName" [(ngModel)]="lastName"
+                                    class="form-control form-control-sm" placeholder="Enter your lastName"
+                                    [ngClass]="{'has-error': clientRegistrationFormError['clNameRequired']}">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="email" class="form-label custom-label">Email</label>
-                                <input type="email" id="email" name="clientEmail" [(ngModel)]="clientEmail" class="form-control form-control-sm"
-                                    placeholder="Enter your email" [ngClass]="{'has-error': clientRegistrationFormError['cemailRequired'] || clientRegistrationFormError['cemailNotValid']}">
+                                <input type="email" id="email" name="clientEmail" [(ngModel)]="clientEmail"
+                                    class="form-control form-control-sm" placeholder="Enter your email"
+                                    [ngClass]="{'has-error': clientRegistrationFormError['cemailRequired'] || clientRegistrationFormError['cemailNotValid']}">
                             </div>
                             <div class="col">
                                 <label for="contactNumber" class="form-label custom-label">Contact Number</label>
-                                <input type="contactNumber" id="contactNumber" name="clientPhoneNumber" [(ngModel)]="clientPhoneNumber" class="form-control form-control-sm"
-                                    placeholder="+94 71 4582 7845" [ngClass]="{'has-error': clientRegistrationFormError['cPNumberRequired']}">
+                                <input type="contactNumber" id="contactNumber" name="clientPhoneNumber"
+                                    [(ngModel)]="clientPhoneNumber" class="form-control form-control-sm"
+                                    placeholder="+94 71 4582 7845"
+                                    [ngClass]="{'has-error': clientRegistrationFormError['cPNumberRequired']}">
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="password" class="form-label custom-label">Password</label>
-                                <input type="text" id="password" name="clientPassword" [(ngModel)]="clientPassword" class="form-control form-control-sm"
-                                    placeholder="Enter your password" [ngClass]="{'has-error': clientRegistrationFormError['cPwRequired']}">
+                                <input type="text" id="password" name="clientPassword" [(ngModel)]="clientPassword"
+                                    class="form-control form-control-sm" placeholder="Enter your password"
+                                    [ngClass]="{'has-error': clientRegistrationFormError['cPwRequired']}">
                             </div>
                             <div class="col">
                                 <label for="confirmPassword" class="form-label custom-label">Confirm password</label>
-                                <input type="text" id="confirmPassword" name="clientConfirmPassword" [(ngModel)]="clientConfirmPassword" class="form-control form-control-sm"
-                                    placeholder="Enter your password again" [ngClass]="{'has-error': clientRegistrationFormError['cCPwRequired']}">
+                                <input type="text" id="confirmPassword" name="clientConfirmPassword"
+                                    [(ngModel)]="clientConfirmPassword" class="form-control form-control-sm"
+                                    placeholder="Enter your password again"
+                                    [ngClass]="{'has-error': clientRegistrationFormError['cCPwRequired']}">
                             </div>
                         </div>
 
-                        <p ngIf="clientRegistrationFormError['passwordNotEqual'] != undefined">{{clientRegistrationFormError['passwordNotEqual']}}</p>
+                        <p class="text-danger" style="font-size: 0.8rem; margin-top: 0px;"
+                            *ngIf="clientRegistrationFormError['passwordNotEqual'] != undefined">
+                            {{clientRegistrationFormError['passwordNotEqual']}}</p>
 
                         <button class="btn btn-sm register-btn w-100" (click)="onRegister()">Register</button>
                     </form>
@@ -63,21 +73,26 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="businessName" class="form-label custom-label">Business Name</label>
-                                <input type="text" id="businessName" name="businessName" [(ngModel)]="businessName" class="form-control form-control-sm"
-                                    placeholder="Enter the business name" [ngClass]="{'has-error': businessRegistrationFormError['bNameRequired']}">
+                                <input type="text" id="businessName" name="businessName" [(ngModel)]="businessName"
+                                    class="form-control form-control-sm" placeholder="Enter the business name"
+                                    [ngClass]="{'has-error': businessRegistrationFormError['bNameRequired']}">
                             </div>
                         </div>
 
+                        {{businessEmail}}
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="bemail" class="form-label custom-label">Email</label>
                                 <input type="email" id="bemail" class="form-control form-control-sm"
-                                    placeholder="Enter your email" name="businessEmail" [ngClass]="{'has-error': businessRegistrationFormError['bEmailRequired'] || businessRegistrationFormError['bEmailNotValid']}">
+                                    placeholder="Enter your email" name="businessEmail" [(ngModel)]="businessEmail"
+                                    [ngClass]="{'has-error': businessRegistrationFormError['bEmailRequired'] || businessRegistrationFormError['bEmailNotValid']}">
                             </div>
                             <div class="col">
                                 <label for="contactNumber" class="form-label custom-label">Contact Number</label>
-                                <input type="contactNumber" id="contactNumber" name="businessPhoneNumber" [(ngModel)]="businessPhoneNumber" class="form-control form-control-sm"
-                                    placeholder="+94 71 4582 7845" [ngClass]="{'has-error': businessRegistrationFormError['bPNumberRequired']}">
+                                <input type="contactNumber" id="contactNumber" name="businessPhoneNumber"
+                                    [(ngModel)]="businessPhoneNumber" class="form-control form-control-sm"
+                                    placeholder="+94 71 4582 7845"
+                                    [ngClass]="{'has-error': businessRegistrationFormError['bPNumberRequired']}">
                             </div>
                         </div>
 
@@ -85,16 +100,22 @@
                             <div class="col">
                                 <label for="password" class="form-label custom-label">Password</label>
                                 <input type="text" id="password" class="form-control form-control-sm"
-                                    placeholder="Enter your password" name="businessPassword" [(ngModel)]="businessPassword" [ngClass]="{'has-error': clientRegistrationFormError['bPwRequired']}" >
+                                    placeholder="Enter your password" name="businessPassword"
+                                    [(ngModel)]="businessPassword"
+                                    [ngClass]="{'has-error': businessRegistrationFormError['bPwRequired']}">
                             </div>
                             <div class="col">
                                 <label for="confirmPassword" class="form-label custom-label">Confirm password</label>
                                 <input type="text" id="confirmPassword" class="form-control form-control-sm"
-                                    placeholder="Enter your password again" name="businessConfirmPassword" [(ngModel)]="businessConfirmPassword" [ngClass]="{'has-error': clientRegistrationFormError['bCPwRequired']}" >
+                                    placeholder="Enter your password again" name="businessConfirmPassword"
+                                    [(ngModel)]="businessConfirmPassword"
+                                    [ngClass]="{'has-error': businessRegistrationFormError['bCPwRequired']}">
                             </div>
                         </div>
 
-                        <p ngIf="clientRegistrationFormError['passwordNotEqual'] != undefined">{{clientRegistrationFormError['passwordNotEqual']}}</p>
+                        <p class="text-danger" style="font-size: 0.8rem;"
+                            *ngIf="businessRegistrationFormError['passwordNotEqual'] != undefined">
+                            {{businessRegistrationFormError['passwordNotEqual']}}</p>
 
                         <button class="btn btn-sm register-btn w-100" (click)="onRegister()">Register</button>
                     </form>
