@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../../../shared/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +12,29 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+
+  constructor(
+
+    private toastService: ToastService,
+
+  ) {}
+
+
   email: string = '';
   password: string = '';
 
-  constructor() {}
+
 
   login() {
-    this.loginSuccess = false;
-    this.loginFailed = true;
+    this.showToastMessage(
+      'Warning!',
+      ['Error subProduct Loading'],
+      'White',
+      '#FCC200',
+      'bi bi-exclamation-triangle-fill'
+    );
+    // this.loginSuccess = false;
+    // this.loginFailed = true;
   }
 
   clearLoginForm() {
@@ -33,7 +49,13 @@ export class LoginComponent {
     this.loginFailed = false;
   }
 
-  closeSAlert(): void {
-    this.loginSuccess = false;
+  showToastMessage(
+    header: string,
+    body: string[],
+    color: string,
+    backgroundColor: string,
+    icon: string
+  ) {
+    this.toastService.show(header, body, color, backgroundColor, icon);
   }
 }
