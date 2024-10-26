@@ -5,6 +5,7 @@ import { USER_MODEL } from '../../../utils/model/userModel';
 import { CommonModule } from '@angular/common';
 import { isValidEmail } from '../../../utils/common';
 import { CommonService } from '../common.service';
+import { ToastService } from '../../../shared/toast.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,6 @@ import { CommonService } from '../common.service';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-
   active: number = 1;
   dateOfBirth: string = '';
   homeAddress: string = '';
@@ -46,7 +46,7 @@ export class RegisterComponent {
     role: '',
   };
 
-  constructor(private commonService: CommonService) {}
+  constructor(private commonService: CommonService, private toastService: ToastService) {}
 
   clientRegistrationFormError: { [key: string]: string } = {};
 
@@ -158,19 +158,26 @@ export class RegisterComponent {
 
         this.commonService.registerUser(this.userModel).subscribe(
           (response) => {
-            console.log(response);
+            if (response.status == 200) {
+              this.showToastMessage('Success!', ['Successfully Registered Client.'], 'White', '#21db21', 'bi bi-check-circle-fill');
+              this.onClear();
+            }
           },
           (error) => {
+            if (error.error.status == 1010) {
+              this.showToastMessage('Warning!', ['Email Already Exist.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+            } else {
+              this.showToastMessage('Warning!', ['Internal Server Error.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+            }
             console.error('Error of registering client : ', error);
           }
         );
       } else {
+        this.showToastMessage('Warning!', ['Invalid Inputs, Check Again.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
         console.log('Invalid Inputs, Check Again.');
       }
     } else {
       this.businessRegistrationFormValidation();
-
-      console.log(this.businessRegistrationFormError)
 
       if (Object.keys(this.businessRegistrationFormError).length === 0) {
         this.userModel = {
@@ -187,13 +194,22 @@ export class RegisterComponent {
 
         this.commonService.registerUser(this.userModel).subscribe(
           (response) => {
-            console.log(response);
+            if (response.status == 200) {
+              this.showToastMessage('Success!', ['Successfully Registered Business.'], 'White', '#21db21', 'bi bi-check-circle-fill');
+              this.onClear();
+            }
           },
           (error) => {
+            if (error.error.status == 1010) {
+              this.showToastMessage('Warning!', ['Email Already Exist.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+            } else {
+              this.showToastMessage('Warning!', ['Internal Server Error.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+            }
             console.error('Error of registering business : ', error);
           }
         );
       } else {
+        this.showToastMessage('Warning!', ['Invalid Inputs, Check Again.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
         console.log('Invalid Inputs, Check Again.');
       }
     }
@@ -234,4 +250,7 @@ export class RegisterComponent {
     this.businessRegistrationFormError = {};
   }
 
+  showToastMessage( header: string, body: string[], color: string, backgroundColor: string, icon: string) {
+    this.toastService.show(header, body, color, backgroundColor, icon);
+  }
 }

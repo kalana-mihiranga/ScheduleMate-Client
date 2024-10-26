@@ -13,28 +13,13 @@ import { ToastService } from '../../../shared/toast.service';
 })
 export class LoginComponent {
 
-  constructor(
-
-    private toastService: ToastService,
-
-  ) {}
-
+  constructor( private toastService: ToastService ) {}
 
   email: string = '';
   password: string = '';
 
-
-
   login() {
-    this.showToastMessage(
-      'Warning!',
-      ['Error subProduct Loading'],
-      'White',
-      '#FCC200',
-      'bi bi-exclamation-triangle-fill'
-    );
-    // this.loginSuccess = false;
-    // this.loginFailed = true;
+    this.showToastMessage('Warning!', ['Error subProduct Loading'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
   }
 
   clearLoginForm() {
@@ -42,20 +27,7 @@ export class LoginComponent {
     this.password = '';
   }
 
-  loginFailed: boolean = false;
-  loginSuccess: boolean = false;
-
-  closeEAlert(): void {
-    this.loginFailed = false;
-  }
-
-  showToastMessage(
-    header: string,
-    body: string[],
-    color: string,
-    backgroundColor: string,
-    icon: string
-  ) {
+  showToastMessage( header: string, body: string[], color: string, backgroundColor: string, icon: string) {
     this.toastService.show(header, body, color, backgroundColor, icon);
   }
 }
