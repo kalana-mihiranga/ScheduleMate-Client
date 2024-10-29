@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="col-4 d-flex justify-content-end">
-                <button class="btn filter-button" type="button">
+                <button class="btn filter-button" type="button" (click)="openFilterFeedModal(filterFeedModal)">
                     filter <i class="bi bi-filter"></i>
                 </button>
             </div>
@@ -60,3 +60,22 @@
 
     <app-footer></app-footer>
 </div>
+
+<ng-template #filterFeedModal let-modal>
+    <div class="modal-header">
+        <h6 class="modal-title">Filter Feed</h6>
+        <button type="button" class="btn-close btn-sm" aria-label="Close"
+            (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body d-flex justify-content-center">
+        <div class="price-range" style="margin-top: 0;">
+            <label for="priceRange" class="form-label">Price Range</label>
+            <div class="range-labels">
+                <span>0 LKR</span>
+                <span id="current-price">MEDIUM</span>
+                <span>100K LKR</span>
+            </div>
+            <input type="range" class="form-range" id="priceRange" min="0" max="100" value="50">
+        </div>
+    </div>
+</ng-template>
