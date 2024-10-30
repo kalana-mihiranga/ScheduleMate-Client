@@ -7,11 +7,13 @@ import { BusinessPackageComponent } from './page/business/business-package/busin
 import { BusinessTourComponent } from './page/business/business-tour/business-tour.component';
 import { ClientLandingComponent } from './page/client/client-landing/client-landing.component';
 import { ServiceViewComponent } from './page/client/service-view/service-view.component';
+import { BusinessServiceComponent } from './page/business/business-service/business-service.component';
 
 export const routes: Routes = [
     { path: 'businessLanding', component: BusinessLandingComponent },
     { path: 'businessPackage', component: BusinessPackageComponent },
     { path: 'businessTour', component: BusinessTourComponent },
+    { path: 'businessService', component: BusinessServiceComponent },
     { path: 'clientLanding', component: ClientLandingComponent },
     { path: 'serviceView', component: ServiceViewComponent },
     { path: 'home', component: LandingComponent },
