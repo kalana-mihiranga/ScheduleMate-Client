@@ -21,7 +21,7 @@ export class LandingComponent {
       location: 'Ambalangoda, SL',
       rating: 4.5,
       imageUrl:
-        'https://belfasthills.org/wp-content/uploads/2014/02/Sample-image-2-150x150.jpg',
+        'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
     },
     {
       id: 10,
@@ -30,7 +30,7 @@ export class LandingComponent {
       location: 'Ambalangoda, SL',
       rating: 4.5,
       imageUrl:
-        'https://belfasthills.org/wp-content/uploads/2014/02/Sample-image-2-150x150.jpg',
+        'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
     },
     {
       id: 10,
@@ -39,7 +39,7 @@ export class LandingComponent {
       location: 'Ambalangoda, SL',
       rating: 4.5,
       imageUrl:
-        'https://belfasthills.org/wp-content/uploads/2014/02/Sample-image-2-150x150.jpg',
+        'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
     },
     {
       id: 10,
@@ -48,7 +48,7 @@ export class LandingComponent {
       location: 'Ambalangoda, SL',
       rating: 4.5,
       imageUrl:
-        'https://belfasthills.org/wp-content/uploads/2014/02/Sample-image-2-150x150.jpg',
+        'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
     },
     {
       id: 10,
@@ -57,7 +57,7 @@ export class LandingComponent {
       location: 'Ambalangoda, SL',
       rating: 4.5,
       imageUrl:
-        'https://belfasthills.org/wp-content/uploads/2014/02/Sample-image-2-150x150.jpg',
+        'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
     },
     {
       id: 10,
@@ -66,7 +66,7 @@ export class LandingComponent {
       location: 'Ambalangoda, SL',
       rating: 4.5,
       imageUrl:
-        'https://belfasthills.org/wp-content/uploads/2014/02/Sample-image-2-150x150.jpg',
+        'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
     },
     {
       id: 10,
@@ -75,7 +75,7 @@ export class LandingComponent {
       location: 'Ambalangoda, SL',
       rating: 4.5,
       imageUrl:
-        'https://belfasthills.org/wp-content/uploads/2014/02/Sample-image-2-150x150.jpg',
+        'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
     },
     {
       id: 10,
@@ -84,7 +84,7 @@ export class LandingComponent {
       location: 'Ambalangoda, SL',
       rating: 4.5,
       imageUrl:
-        'https://belfasthills.org/wp-content/uploads/2014/02/Sample-image-2-150x150.jpg',
+        'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
     },
     {
       id: 10,
@@ -93,7 +93,7 @@ export class LandingComponent {
       location: 'Ambalangoda, SL',
       rating: 4.5,
       imageUrl:
-        'https://belfasthills.org/wp-content/uploads/2014/02/Sample-image-2-150x150.jpg',
+        'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
     },
     {
       id: 10,
@@ -102,7 +102,7 @@ export class LandingComponent {
       location: 'Ambalangoda, SL',
       rating: 4.5,
       imageUrl:
-        'https://belfasthills.org/wp-content/uploads/2014/02/Sample-image-2-150x150.jpg',
+        'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg',
     },
   ];
 
