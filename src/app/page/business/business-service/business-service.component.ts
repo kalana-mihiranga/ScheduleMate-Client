@@ -1,103 +1,16 @@
 import { Component, inject, TemplateRef } from '@angular/core';
-import { NgbModal, NgbPaginationModule, NgbTimepickerModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbPaginationModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { BusinessNavbarComponent } from '../../../common/component/business-navbar/business-navbar.component';
 import { InsideFooterComponent } from '../../../common/component/inside-footer/inside-footer.component';
 import { FormsModule } from '@angular/forms';
-
-interface Country {
-  id?: number;
-  name: string;
-  flag: string;
-  area: number;
-  population: number;
-}
-
-const COUNTRIES: Country[] = [
-  {
-    name: 'Russia',
-    flag: 'f/f3/Flag_of_Russia.svg',
-    area: 17075200,
-    population: 146989754,
-  },
-  {
-    name: 'France',
-    flag: 'c/c3/Flag_of_France.svg',
-    area: 640679,
-    population: 64979548,
-  },
-  {
-    name: 'Germany',
-    flag: 'b/ba/Flag_of_Germany.svg',
-    area: 357114,
-    population: 82114224,
-  },
-  {
-    name: 'Portugal',
-    flag: '5/5c/Flag_of_Portugal.svg',
-    area: 92090,
-    population: 10329506,
-  },
-  {
-    name: 'Canada',
-    flag: 'c/cf/Flag_of_Canada.svg',
-    area: 9976140,
-    population: 36624199,
-  },
-  {
-    name: 'Vietnam',
-    flag: '2/21/Flag_of_Vietnam.svg',
-    area: 331212,
-    population: 95540800,
-  },
-  {
-    name: 'Brazil',
-    flag: '0/05/Flag_of_Brazil.svg',
-    area: 8515767,
-    population: 209288278,
-  },
-  {
-    name: 'Mexico',
-    flag: 'f/fc/Flag_of_Mexico.svg',
-    area: 1964375,
-    population: 129163276,
-  },
-  {
-    name: 'United States',
-    flag: 'a/a4/Flag_of_the_United_States.svg',
-    area: 9629091,
-    population: 324459463,
-  },
-  {
-    name: 'India',
-    flag: '4/41/Flag_of_India.svg',
-    area: 3287263,
-    population: 1324171354,
-  },
-  {
-    name: 'Indonesia',
-    flag: '9/9f/Flag_of_Indonesia.svg',
-    area: 1910931,
-    population: 263991379,
-  },
-  {
-    name: 'Tuvalu',
-    flag: '3/38/Flag_of_Tuvalu.svg',
-    area: 26,
-    population: 11097,
-  },
-  {
-    name: 'China',
-    flag: 'f/fa/Flag_of_the_People%27s_Republic_of_China.svg',
-    area: 9596960,
-    population: 1409517397,
-  },
-];
-
+import { ADD_SERVICE_MODEL, PACKAGE_MODEL } from '../../../utils/model/businessModel';
+import { BusinessService } from '../business.service';
+import { ToastService } from '../../../shared/toast.service';
 
 @Component({
   selector: 'app-business-service',
   standalone: true,
-  imports: [InsideFooterComponent, BusinessNavbarComponent, FormsModule, NgbTypeaheadModule, NgbPaginationModule, NgbTimepickerModule],
+  imports: [InsideFooterComponent, BusinessNavbarComponent, FormsModule, NgbPaginationModule, NgbTimepickerModule],
   templateUrl: './business-service.component.html',
   styleUrl: './business-service.component.scss'
 })
@@ -107,22 +20,32 @@ export class BusinessServiceComponent {
 
   page = 1;
   pageSize = 4;
-  collectionSize = COUNTRIES.length;
-  countries: Country[] = COUNTRIES;
+  collectionSize = 0;
+  countries: any = [];
 
-  constructor() {
-    this.refreshCountries();
-  }
+  constructor(private businessService: BusinessService, private toastService: ToastService) { }
 
   refreshCountries() {
-    this.countries = COUNTRIES.map((country, i) => ({
-      id: i + 1,
-      ...country,
-    })).slice(
-      (this.page - 1) * this.pageSize,
-      (this.page - 1) * this.pageSize + this.pageSize
-    );
+    
   }
+
+  ngOnInit() {
+    // this.fetchBusinessPackages();
+  }
+
+  packageList: any = [];
+
+  // fetchBusinessPackages() {
+  //   this.businessService.getPackages(this.businessId).subscribe(
+  //     (response) => {
+  //       this.packageList = response.body;
+  //       console.log(this.packageList);
+  //     },
+  //     (error) => {
+  //       console.log("Error of fetching business packages : ", error);
+  //     }
+  //   );
+  // }
 
   businessId: number = 6;
   serviceName: string = "";
@@ -131,6 +54,7 @@ export class BusinessServiceComponent {
   conditions: string = "";
   startingTime = { hour: 9, minute: 0 };
   endingTime = { hour: 17, minute: 0 };
+  imageURL: string = "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg";
 
   monday: boolean = false;
   tuesday: boolean = false;
@@ -140,11 +64,152 @@ export class BusinessServiceComponent {
   saturday: boolean = false;
   sunday: boolean = false;
 
-  imageURL: string = "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg";
+  comboPackSelected: boolean = false;
+  budgetPackSelected: boolean = false;
 
+  availabilityArray: any[] = [];
+  packageListArray: any[] = [];
+  startTime: string = "";
+  endTime: string = "";
+
+  servicePayload: ADD_SERVICE_MODEL = {
+    businessId: null,
+    name: "",
+    discountRate: null,
+    description: "",
+    conditions: "",
+    serviceFrom: "",
+    serviceTo: "",
+    availability: null,
+    packageList: null,
+    imageUrl: ""
+  }
+
+  onePackage: PACKAGE_MODEL = {
+    packageId: null,
+    PackageName: ""
+  }
+
+  addBusinessService() {
+
+    if (this.monday) {
+      this.availabilityArray.push("MONDAY");
+    }
+    if (this.tuesday) {
+      this.availabilityArray.push("TUESDAY");
+    }
+    if (this.wednesday) {
+      this.availabilityArray.push("WEDNESDAY");
+    }
+    if (this.thursday) {
+      this.availabilityArray.push("THURSDAY");
+    }
+    if (this.friday) {
+      this.availabilityArray.push("FRIDAY");
+    }
+    if (this.saturday) {
+      this.availabilityArray.push("SATURDAY");
+    }
+    if (this.sunday) {
+      this.availabilityArray.push("SUNDAY");
+    }
+
+    if (this.comboPackSelected) {
+      this.packageListArray.push(
+        this.onePackage = {
+          packageId: 1,
+          PackageName: "combo"
+        }
+      );
+    }
+
+    if (this.budgetPackSelected) {
+      this.packageListArray.push(
+        this.onePackage = {
+          packageId: 2,
+          PackageName: "budget"
+        }
+      );
+    }
+
+    if (this.startingTime.hour < 10 && this.startingTime.minute < 10) {
+      this.startTime = "0" + this.startingTime.hour + ":" + "0" + this.startingTime.minute; 
+    } else if (this.startingTime.hour < 10) {
+      this.startTime = "0" + this.startingTime.hour + ":" + this.startingTime.minute; 
+    } else if (this.startingTime.minute < 10) {
+      this.startTime = this.startingTime.hour + ":" + "0" + this.startingTime.minute; 
+    } else {
+      this.startTime = this.startingTime.hour + ":" + this.startingTime.minute; 
+    }
+
+    if (this.endingTime.hour < 10 && this.endingTime.minute < 10) {
+      this.endTime = "0" + this.endingTime.hour + ":" + "0" + this.endingTime.minute; 
+    } else if (this.endingTime.hour < 10) {
+      this.endTime = "0" + this.endingTime.hour + ":" + this.endingTime.minute; 
+    } else if (this.endingTime.minute < 10) {
+      this.endTime = this.endingTime.hour + ":" + "0" + this.endingTime.minute; 
+    } else {
+      this.endTime = this.endingTime.hour + ":" + this.endingTime.minute; 
+    }
+
+    this.servicePayload = {
+      businessId: this.businessId,
+      name: this.serviceName,
+      discountRate: Number(this.discountRate),
+      description: this.description,
+      conditions: this.conditions,
+      serviceFrom: this.startTime,
+      serviceTo: this.endTime,
+      availability: this.availabilityArray,
+      packageList: this.packageListArray,
+      imageUrl: this.imageURL
+    }
+
+    this.businessService.createService(this.servicePayload).subscribe(
+      (response) => {
+        if (response.status == 200) {
+          this.clearBusinessService();
+          this.showToastMessage('Success!', ['Successfully Added Service.'], 'White', '#21db21', 'bi bi-check-circle-fill');
+        } else {
+            this.showToastMessage('Warning!', ['Internal Server Error.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+        }
+      },
+      (error) => {
+        this.showToastMessage('Warning!', ['Internal Server Error.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+        console.log("error : ", error);
+      }
+    );
+  }
+
+  clearBusinessService() {
+    this.serviceName = "";
+    this.discountRate = "";
+    this.description = "";
+    this.conditions = "";
+    this.startingTime = { hour: 9, minute: 0 };
+    this.endingTime = { hour: 17, minute: 0 };
+
+    this.monday = false;
+    this.tuesday = false;
+    this.wednesday = false;
+    this.thursday = false;
+    this.friday = false;
+    this.saturday = false;
+    this.sunday = false;
+
+    this.comboPackSelected = false;
+    this.budgetPackSelected = false;
+
+    this.availabilityArray = [];
+    this.packageListArray = [];
+  }
 
   openAddService(addService: TemplateRef<any>) {
     this.modalService.open(addService, { centered: true, size: 'xl', scrollable: true });
+  }
+
+  showToastMessage( header: string, body: string[], color: string, backgroundColor: string, icon: string) {
+    this.toastService.show(header, body, color, backgroundColor, icon);
   }
 
 }
