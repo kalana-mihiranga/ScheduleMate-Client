@@ -1,39 +1,65 @@
 import { Component, inject, TemplateRef } from '@angular/core';
-import { NgbModal, NgbPaginationModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModal,
+  NgbPaginationModule,
+  NgbTimepickerModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { BusinessNavbarComponent } from '../../../common/component/business-navbar/business-navbar.component';
 import { InsideFooterComponent } from '../../../common/component/inside-footer/inside-footer.component';
 import { FormsModule } from '@angular/forms';
-import { ADD_SERVICE_MODEL, PACKAGE_MODEL } from '../../../utils/model/businessModel';
+import {
+  ADD_SERVICE_MODEL,
+  PACKAGE_MODEL,
+} from '../../../utils/model/businessModel';
 import { BusinessService } from '../business.service';
 import { ToastService } from '../../../shared/toast.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-business-service',
   standalone: true,
-  imports: [InsideFooterComponent, BusinessNavbarComponent, FormsModule, NgbPaginationModule, NgbTimepickerModule],
+  imports: [
+    InsideFooterComponent,
+    BusinessNavbarComponent,
+    FormsModule,
+    NgbPaginationModule,
+    NgbTimepickerModule,
+    NgFor,
+  ],
   templateUrl: './business-service.component.html',
-  styleUrl: './business-service.component.scss'
+  styleUrl: './business-service.component.scss',
 })
 export class BusinessServiceComponent {
-
   private modalService = inject(NgbModal);
 
   page = 1;
   pageSize = 4;
-  collectionSize = 0;
-  countries: any = [];
+  collectionSize = 10;
+  serviceList: any = [];
 
-  constructor(private businessService: BusinessService, private toastService: ToastService) { }
-
-  refreshCountries() {
-    
-  }
+  constructor(
+    private businessService: BusinessService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
-    // this.fetchBusinessPackages();
+    this.fetchBusinessServices();
   }
 
-  packageList: any = [];
+  refreshServices() {
+    this.fetchBusinessServices();
+  }
+
+  fetchBusinessServices() {
+    this.businessService.getBusinessServices(this.businessId).subscribe(
+      (response) => {
+        this.serviceList = response.body;
+      },
+      (error) => {
+        console.log('Error of fetching business services : ', error);
+      }
+    );
+  }
 
   // fetchBusinessPackages() {
   //   this.businessService.getPackages(this.businessId).subscribe(
@@ -48,13 +74,14 @@ export class BusinessServiceComponent {
   // }
 
   businessId: number = 6;
-  serviceName: string = "";
-  discountRate: string = "";
-  description: string = "";
-  conditions: string = "";
+  serviceName: string = '';
+  discountRate: string = '';
+  description: string = '';
+  conditions: string = '';
   startingTime = { hour: 9, minute: 0 };
   endingTime = { hour: 17, minute: 0 };
-  imageURL: string = "https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg";
+  imageURL: string =
+    'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg';
 
   monday: boolean = false;
   tuesday: boolean = false;
@@ -69,87 +96,90 @@ export class BusinessServiceComponent {
 
   availabilityArray: any[] = [];
   packageListArray: any[] = [];
-  startTime: string = "";
-  endTime: string = "";
+  startTime: string = '';
+  endTime: string = '';
 
   servicePayload: ADD_SERVICE_MODEL = {
     businessId: null,
-    name: "",
+    name: '',
     discountRate: null,
-    description: "",
-    conditions: "",
-    serviceFrom: "",
-    serviceTo: "",
+    description: '',
+    conditions: '',
+    serviceFrom: '',
+    serviceTo: '',
     availability: null,
     packageList: null,
-    imageUrl: ""
-  }
+    imageUrl: '',
+  };
 
   onePackage: PACKAGE_MODEL = {
     packageId: null,
-    PackageName: ""
-  }
+    PackageName: '',
+  };
 
   addBusinessService() {
-
     if (this.monday) {
-      this.availabilityArray.push("MONDAY");
+      this.availabilityArray.push('MONDAY');
     }
     if (this.tuesday) {
-      this.availabilityArray.push("TUESDAY");
+      this.availabilityArray.push('TUESDAY');
     }
     if (this.wednesday) {
-      this.availabilityArray.push("WEDNESDAY");
+      this.availabilityArray.push('WEDNESDAY');
     }
     if (this.thursday) {
-      this.availabilityArray.push("THURSDAY");
+      this.availabilityArray.push('THURSDAY');
     }
     if (this.friday) {
-      this.availabilityArray.push("FRIDAY");
+      this.availabilityArray.push('FRIDAY');
     }
     if (this.saturday) {
-      this.availabilityArray.push("SATURDAY");
+      this.availabilityArray.push('SATURDAY');
     }
     if (this.sunday) {
-      this.availabilityArray.push("SUNDAY");
+      this.availabilityArray.push('SUNDAY');
     }
 
     if (this.comboPackSelected) {
       this.packageListArray.push(
-        this.onePackage = {
+        (this.onePackage = {
           packageId: 1,
-          PackageName: "combo"
-        }
+          PackageName: 'combo',
+        })
       );
     }
 
     if (this.budgetPackSelected) {
       this.packageListArray.push(
-        this.onePackage = {
+        (this.onePackage = {
           packageId: 2,
-          PackageName: "budget"
-        }
+          PackageName: 'budget',
+        })
       );
     }
 
     if (this.startingTime.hour < 10 && this.startingTime.minute < 10) {
-      this.startTime = "0" + this.startingTime.hour + ":" + "0" + this.startingTime.minute; 
+      this.startTime =
+        '0' + this.startingTime.hour + ':' + '0' + this.startingTime.minute;
     } else if (this.startingTime.hour < 10) {
-      this.startTime = "0" + this.startingTime.hour + ":" + this.startingTime.minute; 
+      this.startTime =
+        '0' + this.startingTime.hour + ':' + this.startingTime.minute;
     } else if (this.startingTime.minute < 10) {
-      this.startTime = this.startingTime.hour + ":" + "0" + this.startingTime.minute; 
+      this.startTime =
+        this.startingTime.hour + ':' + '0' + this.startingTime.minute;
     } else {
-      this.startTime = this.startingTime.hour + ":" + this.startingTime.minute; 
+      this.startTime = this.startingTime.hour + ':' + this.startingTime.minute;
     }
 
     if (this.endingTime.hour < 10 && this.endingTime.minute < 10) {
-      this.endTime = "0" + this.endingTime.hour + ":" + "0" + this.endingTime.minute; 
+      this.endTime =
+        '0' + this.endingTime.hour + ':' + '0' + this.endingTime.minute;
     } else if (this.endingTime.hour < 10) {
-      this.endTime = "0" + this.endingTime.hour + ":" + this.endingTime.minute; 
+      this.endTime = '0' + this.endingTime.hour + ':' + this.endingTime.minute;
     } else if (this.endingTime.minute < 10) {
-      this.endTime = this.endingTime.hour + ":" + "0" + this.endingTime.minute; 
+      this.endTime = this.endingTime.hour + ':' + '0' + this.endingTime.minute;
     } else {
-      this.endTime = this.endingTime.hour + ":" + this.endingTime.minute; 
+      this.endTime = this.endingTime.hour + ':' + this.endingTime.minute;
     }
 
     this.servicePayload = {
@@ -162,30 +192,48 @@ export class BusinessServiceComponent {
       serviceTo: this.endTime,
       availability: this.availabilityArray,
       packageList: this.packageListArray,
-      imageUrl: this.imageURL
-    }
+      imageUrl: this.imageURL,
+    };
 
     this.businessService.createService(this.servicePayload).subscribe(
       (response) => {
         if (response.status == 200) {
           this.clearBusinessService();
-          this.showToastMessage('Success!', ['Successfully Added Service.'], 'White', '#21db21', 'bi bi-check-circle-fill');
+          this.showToastMessage(
+            'Success!',
+            ['Successfully Added Service.'],
+            'White',
+            '#21db21',
+            'bi bi-check-circle-fill'
+          );
         } else {
-            this.showToastMessage('Warning!', ['Internal Server Error.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+          this.showToastMessage(
+            'Warning!',
+            ['Internal Server Error.'],
+            'White',
+            '#FCC200',
+            'bi bi-exclamation-triangle-fill'
+          );
         }
       },
       (error) => {
-        this.showToastMessage('Warning!', ['Internal Server Error.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
-        console.log("error : ", error);
+        this.showToastMessage(
+          'Warning!',
+          ['Internal Server Error.'],
+          'White',
+          '#FCC200',
+          'bi bi-exclamation-triangle-fill'
+        );
+        console.log('error : ', error);
       }
     );
   }
 
   clearBusinessService() {
-    this.serviceName = "";
-    this.discountRate = "";
-    this.description = "";
-    this.conditions = "";
+    this.serviceName = '';
+    this.discountRate = '';
+    this.description = '';
+    this.conditions = '';
     this.startingTime = { hour: 9, minute: 0 };
     this.endingTime = { hour: 17, minute: 0 };
 
@@ -205,11 +253,20 @@ export class BusinessServiceComponent {
   }
 
   openAddService(addService: TemplateRef<any>) {
-    this.modalService.open(addService, { centered: true, size: 'xl', scrollable: true });
+    this.modalService.open(addService, {
+      centered: true,
+      size: 'xl',
+      scrollable: true,
+    });
   }
 
-  showToastMessage( header: string, body: string[], color: string, backgroundColor: string, icon: string) {
+  showToastMessage(
+    header: string,
+    body: string[],
+    color: string,
+    backgroundColor: string,
+    icon: string
+  ) {
     this.toastService.show(header, body, color, backgroundColor, icon);
   }
-
 }
