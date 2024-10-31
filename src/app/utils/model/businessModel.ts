@@ -15,3 +15,11 @@ export interface PACKAGE_MODEL {
     packageId: Number | null;
     PackageName: string;
 }
+
+export interface ADD_PACKAGE_MODEL {
+    name: string;
+    duration: string;
+    maximumCount: string;
+    price: string;
+    businessId: Number | null;
+}

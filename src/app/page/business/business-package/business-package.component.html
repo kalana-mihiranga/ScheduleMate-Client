@@ -6,7 +6,8 @@
     <div class="main-container">
         <div class="header-container">
             <h5>Packages</h5>
-            <button type="button" class="btn btn-sm add-btn" (click)="openAddPackage(addPackage)"><i class="bi bi-plus-circle-fill"></i>Create
+            <button type="button" class="btn btn-sm add-btn" (click)="openAddPackage(addPackage)"><i
+                    class="bi bi-plus-circle-fill"></i>Create
                 Package</button>
         </div>
 
@@ -26,27 +27,18 @@
                         <th scope="col" class="text-start start-padding">Package ID</th>
                         <th scope="col" class="text-center">Name</th>
                         <th scope="col" class="text-center">Duration</th>
+                        <th scope="col" class="text-center">Max Passanger</th>
                         <th scope="col" class="text-center">Status</th>
                         <th scope="col" class="text-center">Created date / time</th>
                         <th scope="col" class="text-end end-padding">More Details</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="text-start start-padding">#acd451c</td>
-                        <td class="text-center">Couple Combo</td>
-                        <td class="text-center">30 min</td>
-                        <!-- <td class="text-center"><span class="badge active-badge">Active</span></td> -->
-                        <td class="text-center"><span class="badge inactive-badge">Inactive</span></td>
-                        <td class="text-center">2023:12:15 14:30</td>
-                        <td class="text-end end-padding"><button type="button"
-                                class="btn btn-sm view-button">view</button></td>
-                    </tr>
-
-                    <tr>
-                        <td class="text-start start-padding">#acd451c</td>
-                        <td class="text-center">Couple Combo</td>
-                        <td class="text-center">30 min</td>
+                    <tr *ngFor="let item of packageList">
+                        <td class="text-start start-padding">#bsp{{item.id}}</td>
+                        <td class="text-center">{{item.name}}</td>
+                        <td class="text-center">{{item.duration}} min</td>
+                        <td class="text-center">{{item.maximumCount}} Person</td>
                         <td class="text-center"><span class="badge active-badge">Active</span></td>
                         <!-- <td class="text-center"><span class="badge inactive-badge">Inactive</span></td> -->
                         <td class="text-center">2023:12:15 14:30</td>
@@ -58,11 +50,11 @@
 
             <div class="d-flex justify-content-between p-2">
                 <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-                    (pageChange)="refreshCountries()">
+                    (pageChange)="refreshPackages()">
                 </ngb-pagination>
 
                 <select class="form-select form-select-sm" style="width: auto" [(ngModel)]="pageSize"
-                    (ngModelChange)="refreshCountries()">
+                    (ngModelChange)="refreshPackages()">
                     <option [ngValue]="2">2 items per page</option>
                     <option [ngValue]="4">4 items per page</option>
                     <option [ngValue]="6">6 items per page</option>
@@ -78,37 +70,37 @@
 
 <!-- add package modal -->
 <ng-template #addPackage let-modal>
-	<div class="modal-header">
-		<h6 class="modal-title">Add Package</h6>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-		<div class="row mb-2">
+    <div class="modal-header">
+        <h6 class="modal-title">Add Package</h6>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row mb-2">
             <div class="col">
                 <label for="packageName" class="form-label custom-label small">Package Name</label>
-                <input type="text" id="packageName" class="form-control form-control-sm" placeholder="Package Name">
+                <input type="text" id="packageName" class="form-control form-control-sm" name="packageName" [(ngModel)]="packageName" placeholder="Package Name">
             </div>
 
             <div class="col">
                 <label for="duration" class="form-label custom-label small">Duration (Min)</label>
-                <input type="text" id="duration" class="form-control form-control-sm" placeholder="Duration (Min)">
+                <input type="text" id="duration" class="form-control form-control-sm" name="duration" [(ngModel)]="duration" placeholder="Duration (Min)">
             </div>
         </div>
 
         <div class="row">
             <div class="col">
                 <label for="price" class="form-label custom-label small">Price</label>
-                <input type="text" id="price" class="form-control form-control-sm" placeholder="Price">
+                <input type="text" id="price" class="form-control form-control-sm" name="price" [(ngModel)]="price" placeholder="Price">
             </div>
 
             <div class="col">
-                <label for="pasangerCount" class="form-label custom-label small">Maximum Pasanger Count</label>
-                <input type="text" id="pasangerCount" class="form-control form-control-sm" placeholder="Pasanger Count">
+                <label for="maximumCount" class="form-label custom-label small">Maximum Pasanger Count</label>
+                <input type="text" id="maximumCount" class="form-control form-control-sm" name="maximumCount" [(ngModel)]="maximumCount" placeholder="Pasanger Count">
             </div>
         </div>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-sm btn-danger" (click)="modal.close('Close click')">Cancel</button>
-        <button type="button" class="btn btn-sm btn-success" (click)="modal.close('Close click')">Add</button>
-	</div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-danger" (click)="modal.close('Close click'); clearPackageForm();">Cancel</button>
+        <button type="button" class="btn btn-sm btn-success" (click)="submitPackage()">Add</button>
+    </div>
 </ng-template>
