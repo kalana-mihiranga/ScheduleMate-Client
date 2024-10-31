@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { BASE_URL, CREATE_SERVICE, GET_PACKAGE, GET_SERVICES } from '../../utils/const';
-import { ADD_SERVICE_MODEL } from '../../utils/model/businessModel';
+import { ADD_BUSINESS_PACKAGE, BASE_URL, CREATE_SERVICE, GET_PACKAGE, GET_PACKAGES, GET_SERVICES } from '../../utils/const';
+import { ADD_PACKAGE_MODEL, ADD_SERVICE_MODEL } from '../../utils/model/businessModel';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,14 @@ export class BusinessService {
 
   public getBusinessServices(businessId: number): Observable<any> {
     return this.http.get<any>(`${BASE_URL}${GET_SERVICES}${businessId}`);
+  }
+
+  public submitBusinessPackage(payload: ADD_PACKAGE_MODEL): Observable<any> {
+    return this.http.post<any>(`${BASE_URL}${ADD_BUSINESS_PACKAGE}`, payload);
+  }
+
+  public getBusinessPackages(businessId: number): Observable<any> {
+    return this.http.get<any>(`${BASE_URL}${GET_PACKAGES}${businessId}`);
   }
 
 }
