@@ -39,9 +39,9 @@
                         <td class="text-center">{{item.name}}</td>
                         <td class="text-center">{{item.duration}} min</td>
                         <td class="text-center">{{item.maximumCount}} Person</td>
-                        <td class="text-center"><span class="badge active-badge">Active</span></td>
-                        <!-- <td class="text-center"><span class="badge inactive-badge">Inactive</span></td> -->
-                        <td class="text-center">2023:12:15 14:30</td>
+                        <td *ngIf="item.status" class="text-center"><span class="badge active-badge">Active</span></td>
+                        <td *ngIf="!item.status" class="text-center"><span class="badge inactive-badge">Inactive</span></td>
+                        <td class="text-center">{{item.createdTime}}</td>
                         <td class="text-end end-padding"><button type="button"
                                 class="btn btn-sm view-button">view</button></td>
                     </tr>
