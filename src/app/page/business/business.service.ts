@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ADD_BUSINESS_PACKAGE, BASE_URL, CREATE_SERVICE, GET_PACKAGE, GET_PACKAGES, GET_SERVICES } from '../../utils/const';
@@ -19,8 +19,9 @@ export class BusinessService {
     return this.http.get<any>(`${BASE_URL}${GET_PACKAGE}${businessId}`);
   }
 
-  public getBusinessServices(businessId: number): Observable<any> {
-    return this.http.get<any>(`${BASE_URL}${GET_SERVICES}${businessId}`);
+  public getBusinessServices(businessId: number, page: number, pageSize: number): Observable<any> {
+    const params = new HttpParams().set('page', page).set('size', pageSize);
+    return this.http.get<any>(`${BASE_URL}${GET_SERVICES}${businessId}`, {params});
   }
 
   public submitBusinessPackage(payload: ADD_PACKAGE_MODEL): Observable<any> {

@@ -34,7 +34,7 @@ export class BusinessServiceComponent {
 
   page = 1;
   pageSize = 4;
-  collectionSize = 10;
+  collectionSize = 0;
   serviceList: any = [];
 
   constructor(
@@ -51,9 +51,10 @@ export class BusinessServiceComponent {
   }
 
   fetchBusinessServices() {
-    this.businessService.getBusinessServices(this.businessId).subscribe(
+    this.businessService.getBusinessServices(this.businessId, this.page-1, this.pageSize).subscribe(
       (response) => {
-        this.serviceList = response.body;
+        this.serviceList = response.body.content;
+        this.collectionSize = response.body.totalElements;
       },
       (error) => {
         console.log('Error of fetching business services : ', error);
