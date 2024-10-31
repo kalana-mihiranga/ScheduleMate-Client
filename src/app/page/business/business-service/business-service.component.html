@@ -6,7 +6,8 @@
     <div class="main-container">
         <div class="header-container">
             <h5>Services</h5>
-            <button type="button" class="btn btn-sm add-btn" (click)="openAddService(addService)"><i class="bi bi-plus-circle-fill"></i>Create
+            <button type="button" class="btn btn-sm add-btn" (click)="openAddService(addService)"><i
+                    class="bi bi-plus-circle-fill"></i>Create
                 Service</button>
         </div>
 
@@ -32,22 +33,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="text-start start-padding">#bsc451c</td>
-                        <td class="text-center">Lagoon Adventure</td>
-                        <td class="text-center">10</td>
-                        <td class="text-center">10:00</td>
-                        <td class="text-center">17:30</td>
-                        <td class="text-end end-padding"><button type="button"
-                                class="btn btn-sm view-button">view</button></td>
-                    </tr>
-
-                    <tr>
-                        <td class="text-start start-padding">#bsc451c</td>
-                        <td class="text-center">Lagoon Adventure</td>
-                        <td class="text-center">10</td>
-                        <td class="text-center">10:00</td>
-                        <td class="text-center">17:30</td>
+                    <tr *ngFor="let item of serviceList">
+                        <td class="text-start start-padding">#bsc{{item.id}}</td>
+                        <td class="text-center">{{item.name}}</td>
+                        <td class="text-center">{{item.discountRate}}</td>
+                        <td class="text-center">{{item.serviceFrom}}</td>
+                        <td class="text-center">{{item.serviceTo}}</td>
                         <td class="text-end end-padding"><button type="button"
                                 class="btn btn-sm view-button">view</button></td>
                     </tr>
@@ -56,11 +47,11 @@
 
             <div class="d-flex justify-content-between p-2">
                 <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-                    (pageChange)="refreshCountries()">
+                    (pageChange)="refreshServices()">
                 </ngb-pagination>
 
                 <select class="form-select form-select-sm" style="width: auto" [(ngModel)]="pageSize"
-                    (ngModelChange)="refreshCountries()">
+                    (ngModelChange)="refreshServices()">
                     <option [ngValue]="2">2 items per page</option>
                     <option [ngValue]="4">4 items per page</option>
                     <option [ngValue]="6">6 items per page</option>
@@ -77,32 +68,36 @@
 
 <!-- add package modal -->
 <ng-template #addService let-modal>
-	<div class="modal-header">
-		<h6 class="modal-title">Add Service</h6>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-		<div class="row mb-2">
+    <div class="modal-header">
+        <h6 class="modal-title">Add Service</h6>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row mb-2">
             <div class="col">
                 <label for="serviceName" class="form-label custom-label small">Service Name</label>
-                <input type="text" id="serviceName" class="form-control form-control-sm" name="serviceName" [(ngModel)]="serviceName" placeholder="Service Name">
+                <input type="text" id="serviceName" class="form-control form-control-sm" name="serviceName"
+                    [(ngModel)]="serviceName" placeholder="Service Name">
             </div>
 
             <div class="col">
                 <label for="discountRate" class="form-label custom-label small">Discount Rate</label>
-                <input type="text" id="discountRate" class="form-control form-control-sm" name="discountRate" [(ngModel)]="discountRate" placeholder="Discount Rate">
+                <input type="text" id="discountRate" class="form-control form-control-sm" name="discountRate"
+                    [(ngModel)]="discountRate" placeholder="Discount Rate">
             </div>
         </div>
 
         <div class="row">
             <div class="col">
                 <label for="description" class="form-label custom-label small">Description</label>
-                <textarea class="form-control" id="description" name="description" [(ngModel)]="description" rows="2"></textarea>
+                <textarea class="form-control" id="description" name="description" [(ngModel)]="description"
+                    rows="2"></textarea>
             </div>
 
             <div class="col">
                 <label for="conditions" class="form-label custom-label small">Conditions</label>
-                <textarea class="form-control" id="conditions" name="conditions" [(ngModel)]="conditions" rows="2"></textarea>
+                <textarea class="form-control" id="conditions" name="conditions" [(ngModel)]="conditions"
+                    rows="2"></textarea>
             </div>
         </div>
 
@@ -128,39 +123,42 @@
                     <input class="form-check-input" type="checkbox" name="monday" [(ngModel)]="monday" id="monday">
                     <label class="form-check-label" for="monday">Monday</label>
                 </div>
-            
+
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="tuesday" [(ngModel)]="tuesday" id="tuesday">
                     <label class="form-check-label" for="tuesday">Tuesday</label>
                 </div>
-            
+
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="wednesday" [(ngModel)]="wednesday" id="wednesday">
+                    <input class="form-check-input" type="checkbox" name="wednesday" [(ngModel)]="wednesday"
+                        id="wednesday">
                     <label class="form-check-label" for="wednesday">Wednesday</label>
                 </div>
-            
+
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="thursday" [(ngModel)]="thursday" id="thursday">
+                    <input class="form-check-input" type="checkbox" name="thursday" [(ngModel)]="thursday"
+                        id="thursday">
                     <label class="form-check-label" for="thursday">Thursday</label>
                 </div>
-            
+
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="friday" [(ngModel)]="friday" id="friday">
                     <label class="form-check-label" for="friday">Friday</label>
                 </div>
-            
+
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="saturday" [(ngModel)]="saturday" id="saturday">
+                    <input class="form-check-input" type="checkbox" name="saturday" [(ngModel)]="saturday"
+                        id="saturday">
                     <label class="form-check-label" for="saturday">Saturday</label>
                 </div>
-            
+
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="sunday" [(ngModel)]="sunday" id="sunday">
                     <label class="form-check-label" for="sunday">Sunday</label>
                 </div>
             </div>
-        </div> 
-        
+        </div>
+
         <div class="row">
             <label for="" class="form-label">Select Packages</label>
         </div>
@@ -168,19 +166,22 @@
         <div class="row pt-3 pb-3" style="display: flex; justify-content: center;">
             <div class="col-10 d-flex" style="gap: 20px;">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="comboPackSelected" [(ngModel)]="comboPackSelected" id="monday">
+                    <input class="form-check-input" type="checkbox" name="comboPackSelected"
+                        [(ngModel)]="comboPackSelected" id="monday">
                     <label class="form-check-label" for="monday">Combo Pack</label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="budgetPackSelected" [(ngModel)]="budgetPackSelected" id="monday">
+                    <input class="form-check-input" type="checkbox" name="budgetPackSelected"
+                        [(ngModel)]="budgetPackSelected" id="monday">
                     <label class="form-check-label" for="monday">Budget Pack</label>
                 </div>
             </div>
-        </div> 
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-sm btn-danger" (click)="modal.close('Close click'); clearBusinessService()">Cancel</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-danger"
+            (click)="modal.close('Close click'); clearBusinessService()">Cancel</button>
         <button type="button" class="btn btn-sm btn-success" (click)="addBusinessService()">Add</button>
-	</div>
+    </div>
 </ng-template>
