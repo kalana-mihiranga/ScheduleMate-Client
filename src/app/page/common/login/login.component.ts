@@ -18,8 +18,30 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
+  loginFormError: { [key: string]: string } = {};
+
+  loginFormValidation(): void {
+    this.loginFormError = {};
+
+    if (this.email == '') {
+      this.loginFormError['emailRequired'] =
+        'Email required';
+    }
+
+    if (this.password == '') {
+      this.loginFormError['passwordRequired'] =
+        'Password required';
+    }    
+  }
+
   login() {
-    this.showToastMessage('Warning!', ['Error subProduct Loading'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+    this.loginFormValidation();
+
+    if (Object.keys(this.loginFormError).length == 0) {
+      this.showToastMessage('Success!', ['Successfully Login.'], 'White', '#21db21', 'bi bi-check-circle-fill');
+    } else {
+      this.showToastMessage('Warning!', ['Invalid Input, Check Again.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+    }
   }
 
   clearLoginForm() {

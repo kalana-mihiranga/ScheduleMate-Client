@@ -33,7 +33,7 @@ export class BusinessPackageComponent {
 
   page = 1;
   pageSize = 4;
-  collectionSize = 10;
+  collectionSize = 0;
   countries: any[] = [];
 
   constructor(private businessService: BusinessService, private toastService: ToastService) {
@@ -49,10 +49,11 @@ export class BusinessPackageComponent {
   packageList: any[] = [];
 
   getBPackages() {
-    this.businessService.getBusinessPackages(this.businessId).subscribe(
+    this.businessService.getBusinessPackages(this.businessId, this.page-1, this.pageSize).subscribe(
       (response) => {
 
-        this.packageList = response.body;
+        this.collectionSize = response.body.totalElements;
+        this.packageList = response.body.content;
 
       },
       (error) => {
@@ -62,7 +63,7 @@ export class BusinessPackageComponent {
   }
 
   refreshPackages() {
-    console.log("refresh")
+    this.getBPackages();
   }
 
   packageName: string = "";

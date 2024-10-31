@@ -28,8 +28,9 @@ export class BusinessService {
     return this.http.post<any>(`${BASE_URL}${ADD_BUSINESS_PACKAGE}`, payload);
   }
 
-  public getBusinessPackages(businessId: number): Observable<any> {
-    return this.http.get<any>(`${BASE_URL}${GET_PACKAGES}${businessId}`);
+  public getBusinessPackages(businessId: number, pageNumber: number, pageSize: number): Observable<any> {
+    const params = new HttpParams().set('page', pageNumber).set('size', pageSize);
+    return this.http.get<any>(`${BASE_URL}${GET_PACKAGES}${businessId}`, { params });
   }
 
 }
