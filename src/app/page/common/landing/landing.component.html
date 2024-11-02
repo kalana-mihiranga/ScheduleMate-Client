@@ -6,8 +6,8 @@
 
             <div class="col-8">
                 <div class="input-group search-bar-container">
-                    <input type="text" class="form-control form-control-sm">
-                    <button class="btn search-button" type="button">
+                    <input type="text" name="searchKey" [(ngModel)]="searchKey" (ngModelChange)="getSFeed()" class="form-control form-control-sm">
+                    <button class="btn search-button" type="button" (click)="getSFeed()">
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
@@ -21,20 +21,20 @@
         </div>
     </div>
 
-    <div class="flex-grow-2 container mt-4">
+    <div *ngIf="!isEmptyBlockEnabled" class="flex-grow-2 container mt-4">
         <div class="feed">
             <div class="row">
-                <div class="col-md-3 mb-3" *ngFor="let item of feedItems">
+                <div class="col-md-3 mb-3" *ngFor="let item of serviceFeedList">
                     <div class="card h-300">
                         <div class="card-body">
                             <img src="{{ item.imageUrl }}" class="card-img-top" alt="Card image">
 
                             <div class="top-section">
                                 <div class="section-1">
-                                    <p>{{item.businessName}}</p>
+                                    <p>{{item.name}}</p>
                                 </div>
                                 <div class="section-2">
-                                    <p>{{item.location}}</p>
+                                    <p>Tangalle, SriLanka</p>
                                 </div>
                             </div>
 
@@ -43,7 +43,7 @@
                                     <p>{{item.description}}</p>
                                 </div>
                                 <div class="section-2">
-                                    <p>{{item.rating}}</p><i class="bi bi-hand-thumbs-up"></i>
+                                    <p>5</p><i class="bi bi-hand-thumbs-up"></i>
 
                                 </div>
                             </div>
@@ -56,6 +56,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div *ngIf="isEmptyBlockEnabled" style="min-height: 75vh; display: flex; justify-content: center; align-items: center; background-color: rgb(247, 247, 247); margin-top: 1vh;">
+        <h5 style="color: rgb(190, 190, 190);">Not Found Result!</h5>
     </div>
 
     <app-footer></app-footer>
