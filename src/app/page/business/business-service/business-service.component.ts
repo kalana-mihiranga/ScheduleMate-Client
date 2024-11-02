@@ -15,6 +15,7 @@ import { BusinessService } from '../business.service';
 import { ToastService } from '../../../shared/toast.service';
 import { NgFor } from '@angular/common';
 import { CommonService } from '../../common/common.service';
+import { UserNotificationsComponent } from '../../../shared/notifications/user-notifications/user-notifications.component';
 
 @Component({
   selector: 'app-business-service',
@@ -26,6 +27,7 @@ import { CommonService } from '../../common/common.service';
     NgbPaginationModule,
     NgbTimepickerModule,
     NgFor,
+    UserNotificationsComponent
   ],
   templateUrl: './business-service.component.html',
   styleUrl: './business-service.component.scss',
