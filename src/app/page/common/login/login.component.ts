@@ -3,6 +3,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../../../shared/toast.service';
+import { CommonService } from '../common.service';
+import { LOGIN_MODEL } from '../../../utils/model/userModel';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +16,7 @@ import { ToastService } from '../../../shared/toast.service';
 })
 export class LoginComponent {
 
-  constructor( private toastService: ToastService ) {}
+  constructor( private toastService: ToastService, private commonService: CommonService, private router: Router ) {}
 
   email: string = '';
   password: string = '';
@@ -34,11 +37,46 @@ export class LoginComponent {
     }    
   }
 
+  loginPayload: LOGIN_MODEL = {
+    email: "",
+    password: ""
+  }
+
   login() {
     this.loginFormValidation();
 
     if (Object.keys(this.loginFormError).length == 0) {
-      this.showToastMessage('Success!', ['Successfully Login.'], 'White', '#21db21', 'bi bi-check-circle-fill');
+      this.loginPayload = {
+        email: this.email,
+        password: this.password
+      }
+
+      this.commonService.loginUser(this.loginPayload).subscribe(
+        (response) => {
+          if (response.status == 200) {
+            this.showToastMessage('Success!', ['Login Success.'], 'White', '#21db21', 'bi bi-check-circle-fill');
+            this.clearLoginForm();
+
+            this.commonService.setItem("ID", (response.id).toString());
+            this.commonService.setItem("ROLE", response.role);
+            this.commonService.setItem("NAME", response.name);
+            this.commonService.setItem("EMAIL", response.email);
+
+            if (response.role == "CLIENT") {
+              this.router.navigate(['/clientHome']);
+            } else {
+              this.router.navigate(['/businessLanding']);
+            }
+          } else {
+            this.showToastMessage('Warning!', ['Internal Server Error.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+          }
+        },
+        (error) => {
+          this.showToastMessage('Warning!', [error.error.message], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
+          console.error('Error of registering client : ', error);
+        }
+      );
+
     } else {
       this.showToastMessage('Warning!', ['Invalid Input, Check Again.'], 'White', '#FCC200', 'bi bi-exclamation-triangle-fill');
     }
@@ -47,6 +85,11 @@ export class LoginComponent {
   clearLoginForm() {
     this.email = '';
     this.password = '';
+
+    this.loginPayload = {
+      email: "",
+      password: ""
+    }
   }
 
   showToastMessage( header: string, body: string[], color: string, backgroundColor: string, icon: string) {

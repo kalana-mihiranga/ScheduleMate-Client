@@ -14,6 +14,7 @@ import {
 import { BusinessService } from '../business.service';
 import { ToastService } from '../../../shared/toast.service';
 import { NgFor } from '@angular/common';
+import { CommonService } from '../../common/common.service';
 
 @Component({
   selector: 'app-business-service',
@@ -39,11 +40,22 @@ export class BusinessServiceComponent {
 
   constructor(
     private businessService: BusinessService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private commonService: CommonService
   ) {}
 
+  businessId: number | null = null;
+
   ngOnInit() {
-    this.fetchBusinessServices();
+    this.loadLocalStorageData();
+  }
+
+  loadLocalStorageData() {
+    const idFromStorage = this.commonService.getItem("ID");
+    if (idFromStorage) {
+      this.businessId = parseInt(idFromStorage, 10);
+      this.fetchBusinessServices();
+    }
   }
 
   refreshServices() {
@@ -51,15 +63,19 @@ export class BusinessServiceComponent {
   }
 
   fetchBusinessServices() {
-    this.businessService.getBusinessServices(this.businessId, this.page-1, this.pageSize).subscribe(
-      (response) => {
-        this.serviceList = response.body.content;
-        this.collectionSize = response.body.totalElements;
-      },
-      (error) => {
-        console.log('Error of fetching business services : ', error);
-      }
-    );
+    if (this.businessId !== null) {
+      this.businessService.getBusinessServices(this.businessId, this.page-1, this.pageSize).subscribe(
+        (response) => {
+          this.serviceList = response.body.content;
+          this.collectionSize = response.body.totalElements;
+        },
+        (error) => {
+          console.log('Error of fetching business services : ', error);
+        }
+      );
+    } else {
+      console.error("svs")
+    }
   }
 
   // fetchBusinessPackages() {
@@ -74,7 +90,6 @@ export class BusinessServiceComponent {
   //   );
   // }
 
-  businessId: number = 6;
   serviceName: string = '';
   discountRate: string = '';
   description: string = '';

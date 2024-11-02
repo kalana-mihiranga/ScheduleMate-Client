@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { InsideFooterComponent } from '../../../common/component/inside-footer/inside-footer.component';
 import { BusinessNavbarComponent } from '../../../common/component/business-navbar/business-navbar.component';
+import { CommonService } from '../../common/common.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-business-landing',
@@ -11,5 +13,12 @@ import { BusinessNavbarComponent } from '../../../common/component/business-navb
 })
 
 export class BusinessLandingComponent {
+
+  constructor(private commonService: CommonService, private router: Router) {}
+
+  logout () {
+    this.commonService.clear();
+    this.router.navigate(['/login']);
+  }
 
 }

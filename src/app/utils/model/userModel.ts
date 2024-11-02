@@ -9,3 +9,8 @@ export interface USER_MODEL {
     password: string;
     role: string;
 }
+
+export interface LOGIN_MODEL {
+    email: string;
+    password: string;
+}
